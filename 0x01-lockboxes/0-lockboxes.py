@@ -25,25 +25,3 @@ def canUnlockAll(boxes):
     unlocked = {0}
     dfs(0, unlocked)
     return len(unlocked) == len(boxes)
-
-
-# Test cases
-def test_canUnlockAll():
-    # Test case 1: All boxes can be opened
-    boxes1 = [[1], [2], [3], [4], []]
-    assert canUnlockAll(boxes1) == True, "Test case 1 failed"
-
-    # Test case 2: Not all boxes can be opened
-    boxes2 = [[1, 4, 6], [2], [0, 4, 1], [5, 6, 2], [3], [4, 1], [6]]
-    assert canUnlockAll(boxes2) == True, "Test case 2 failed"
-
-    # Test case 3: Some boxes can't be reached
-    boxes3 = [[1, 4], [2], [0, 4, 1], [3], [], [4, 1], [5, 6]]
-    assert canUnlockAll(boxes3) == False, "Test case 3 failed"
-
-    print("All test cases passed!")
-
-
-# Run the tests
-if __name__ == "__main__":
-    test_canUnlockAll()
