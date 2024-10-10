@@ -7,6 +7,10 @@ def canUnlockAll(boxes):
     Solves the lockboxes problem using Depth-First Search with recursion.
     Time Complexity: O(N + K)
     Space Complexity: O(N) - Due to recursion stack
+    Args:
+        boxes: List of lists containing keys to other boxes
+    Returns:
+        bool: True if all boxes can be opened, False otherwise
     """
 
     def dfs(box, unlocked):
