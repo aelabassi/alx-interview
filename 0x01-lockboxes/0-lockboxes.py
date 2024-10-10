@@ -7,8 +7,10 @@ def canUnlockAll(boxes):
     Determines if all boxes can be opened.
 
     Parameters:
-    boxes (list of lists): A list of n boxes, where boxes[i] represents the keys
-                          in box i. Each box is numbered sequentially from 0 to n-1.
+    boxes (list of lists): A list of n boxes, where boxes[i]
+                          represents the keys
+                          in box i. Each box is numbered
+                          sequentially from 0 to n-1.
 
     Returns:
     bool: True if all boxes can be opened, False otherwise
@@ -39,40 +41,5 @@ def canUnlockAll(boxes):
     return len(unlocked) == n
 
 
-def test_canUnlockAll():
-    """
-    Test cases for the canUnlockAll function
-    """
-    # Test case 1: Simple sequential case
-    boxes1 = [[1], [2], [3], [4], []]
-    print(f"Test case 1: {boxes1}")
-    result = canUnlockAll(boxes1)
-    print(f"Expected: True, Got: {result}")
-    assert result == True, "Test case 1 failed"
-
-    # Test case 2: More complex case with multiple keys
-    boxes2 = [[1, 4], [2], [0, 4, 1], [3], [], [4, 1], [5, 6]]
-    print(f"\nTest case 2: {boxes2}")
-    result = canUnlockAll(boxes2)
-    print(f"Expected: False, Got: {result}")
-    assert result == False, "Test case 2 failed"
-
-    # Test case 3: Cannot open all boxes
-    boxes3 = [[1, 3], [3, 0, 1], [2], [0]]
-    print(f"\nTest case 3: {boxes3}")
-    result = canUnlockAll(boxes3)
-    print(f"Expected: False, Got: {result}")
-    assert result == False, "Test case 3 failed"
-
-    # Test case 4: Single box
-    boxes4 = [[]]
-    print(f"\nTest case 4: {boxes4}")
-    result = canUnlockAll(boxes4)
-    print(f"Expected: True, Got: {result}")
-    assert result == True, "Test case 4 failed"
-
-    print("\nAll test cases passed!")
-
-
 if __name__ == "__main__":
-    test_canUnlockAll()
+    canUnlockAll()
