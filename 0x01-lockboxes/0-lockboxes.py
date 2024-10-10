@@ -42,4 +42,4 @@ def canUnlockAll(boxes):
 
 
 if __name__ == "__main__":
-    canUnlockAll()
+    canUnlockAll([[]])
