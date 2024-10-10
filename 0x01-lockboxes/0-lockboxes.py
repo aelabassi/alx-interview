@@ -4,48 +4,75 @@
 
 def canUnlockAll(boxes):
     """
-    Determines if all boxes in a list of locked boxes can be opened.
+    Determines if all boxes can be opened.
 
-    Args:
-        boxes (list of lists): A list of lists where
-                              each inner list contains keys.
-                              Keys are positive integers.
-                              A key with the same number
-                              as a box opens that box.
-                              The first box boxes[0] is unlocked.
-                              There can be keys that do not have boxes.
+    Parameters:
+    boxes (list of lists): A list of n boxes, where boxes[i] represents the keys
+                          in box i. Each box is numbered sequentially from 0 to n-1.
 
     Returns:
-        bool: True if all boxes can be opened, else False
+    bool: True if all boxes can be opened, False otherwise
 
-    Example:
-        >>> boxes = [[1], [2], [3], [4], []]
-        >>> canUnlockAll(boxes)
-        True
-        >>> boxes = [[1, 4, 6], [2], [0, 4, 1], [5, 6, 2], [3], [4, 1], [6]]
-        >>> canUnlockAll(boxes)
-        True
-        >>> boxes = [[1, 4], [2], [0, 4, 1], [3], [], [4, 1], [5, 6]]
-        >>> canUnlockAll(boxes)
-        False
+    Requirements:
+    - Boxes are numbered sequentially from 0 to n-1
+    - Each box contains keys to other boxes
+    - Box 0 is unlocked initially
     """
     n = len(boxes)
     if n == 0:
         return False
 
-    unlocked = set([0])  # First box is always unlocked
-    keys = set(boxes[0])  # Keys from the first box
+    # Keep track of which boxes we can unlock
+    unlocked = {0}  # Box 0 is already unlocked
+    keys_to_try = boxes[0][:]  # Make a copy of the keys from box 0
 
-    while keys:
-        new_key = keys.pop()
+    while keys_to_try:
+        key = keys_to_try.pop()
 
-        # Check if the key opens a valid, new box
-        if (isinstance(new_key, int) and 0 <= new_key < n and
-                new_key not in unlocked):
-            unlocked.add(new_key)
-            # Add new keys from the newly opened box
-            for key in boxes[new_key]:
-                if isinstance(key, int) and key >= 0:
-                    keys.add(key)
+        # Check if this is a valid box number and we haven't unlocked it yet
+        if 0 <= key < n and key not in unlocked:
+            unlocked.add(key)
+            # Add new keys from this box to our keys to try
+            keys_to_try.extend(boxes[key])
 
+    # Check if we can unlock all boxes
     return len(unlocked) == n
+
+
+def test_canUnlockAll():
+    """
+    Test cases for the canUnlockAll function
+    """
+    # Test case 1: Simple sequential case
+    boxes1 = [[1], [2], [3], [4], []]
+    print(f"Test case 1: {boxes1}")
+    result = canUnlockAll(boxes1)
+    print(f"Expected: True, Got: {result}")
+    assert result == True, "Test case 1 failed"
+
+    # Test case 2: More complex case with multiple keys
+    boxes2 = [[1, 4], [2], [0, 4, 1], [3], [], [4, 1], [5, 6]]
+    print(f"\nTest case 2: {boxes2}")
+    result = canUnlockAll(boxes2)
+    print(f"Expected: False, Got: {result}")
+    assert result == False, "Test case 2 failed"
+
+    # Test case 3: Cannot open all boxes
+    boxes3 = [[1, 3], [3, 0, 1], [2], [0]]
+    print(f"\nTest case 3: {boxes3}")
+    result = canUnlockAll(boxes3)
+    print(f"Expected: False, Got: {result}")
+    assert result == False, "Test case 3 failed"
+
+    # Test case 4: Single box
+    boxes4 = [[]]
+    print(f"\nTest case 4: {boxes4}")
+    result = canUnlockAll(boxes4)
+    print(f"Expected: True, Got: {result}")
+    assert result == True, "Test case 4 failed"
+
+    print("\nAll test cases passed!")
+
+
+if __name__ == "__main__":
+    test_canUnlockAll()
