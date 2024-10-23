@@ -40,7 +40,7 @@ try:
                 total_file_size += int(rs_line[0])
                 code = rs_line[1]
 
-                if code in status_codes:
+                if code in status_codes.keys():
                     status_codes[code] += 1
         if counter % 10 == 0:
             print_stats(status_codes, total_file_size)
