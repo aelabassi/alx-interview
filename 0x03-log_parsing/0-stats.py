@@ -45,9 +45,6 @@ try:
         if counter % 10 == 0:
             print_stats(status_codes, total_file_size)
             counter = 0
-except KeyboardInterrupt:
-    print_stats(status_codes, total_file_size)
-    raise KeyboardInterrupt
 finally:
     print_stats(status_codes, total_file_size)
 
