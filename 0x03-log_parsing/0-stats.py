@@ -7,20 +7,16 @@ from typing import Dict
 
 def print_stats(status_codes: Dict[str, int], file_size: int):
     """ function that reads stdin line by line and computes metrics
-    Input format: <IP Address> - [<date>] "GET /projects/260 HTTP/1.1" 
-    <status code> <file size> (if the format is not this one, 
-    the line must be skipped)
-
     Args:
         status_codes (dict): dictionary with status codes
         file_size (int): file size
-        
     Returns:
         None
         """
     print("File size: {}".format(file_size))
     for key, value in sorted(status_codes.items()):
         print("{}: {}".format(key, value))
+
 
 total_file_size = 0
 counter = 0
@@ -47,4 +43,3 @@ try:
             counter = 0
 finally:
     print_stats(status_codes, total_file_size)
-
