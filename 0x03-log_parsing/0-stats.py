@@ -5,7 +5,7 @@ import re
 from typing import Dict
 
 
-def print_stats(status_codes: Dict, file_size: int):
+def print_stats(status_codes: Dict[str, int], file_size: int):
     """ function that reads stdin line by line and computes metrics
     Input format: <IP Address> - [<date>] "GET /projects/260 HTTP/1.1" 
     <status code> <file size> (if the format is not this one, 
@@ -31,16 +31,23 @@ status_codes = {
 }
 try:
     for line in sys.stdin:
-        counter += 1
-        data = line.split()
-        if len(data) > 2:
-            total_file_size += int(data[-1])
-            code = data[-2]
-            if code in status_codes:
-                status_codes[code] += 1
+        s_line = line.split()
+        rs_line = s_line[::-1]
+        if len(rs_line) > 2:
+            counter += 1
+
+            if counter <= 10:
+                total_file_size += int(rs_line[0])
+                code = rs_line[1]
+
+                if code in status_codes:
+                    status_codes[code] += 1
         if counter % 10 == 0:
             print_stats(status_codes, total_file_size)
+            counter = 0
 except KeyboardInterrupt:
     print_stats(status_codes, total_file_size)
     raise KeyboardInterrupt
+finally:
+    print_stats(status_codes, total_file_size)
 
