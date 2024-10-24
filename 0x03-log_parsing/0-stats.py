@@ -14,7 +14,8 @@ if __name__ == "__main__":
             """
         print("File size: {}".format(file_size))
         for key, value in sorted(status_codes.items()):
-            print("{}: {}".format(key, value))
+            if value != 0:
+                print("{}: {}".format(key, value))
 
     total_file_size = 0
     counter = 0
