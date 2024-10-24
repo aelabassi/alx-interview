@@ -36,7 +36,7 @@ if __name__ == "__main__":
 
                     if code in status_codes.keys():
                         status_codes[code] += 1
-            if counter % 10 == 0:
+            if counter == 10:
                 print_stats(status_codes, total_file_size)
                 counter = 0
     finally:
